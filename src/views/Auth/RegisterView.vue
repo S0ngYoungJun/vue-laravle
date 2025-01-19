@@ -1,5 +1,10 @@
 <script setup>
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 import {reactive} from "vue";
+
+const {error} = storeToRefs(useAuthStore())
+const { authenticate } = useAuthStore();
 
 const formData = reactive({
   name:"",
@@ -11,11 +16,12 @@ const formData = reactive({
 
 <template>
   <main>
-    <h1 class="title">Resister a new account</h1>
+    <h1 class="title">Resister a new account {{ authStore.user }}</h1>
     <form @submit.prevent="console.log(formData)" 
     class="w-1/2 mx-auto space-y-6">
       <div>
         <input type="text" placeholder="Name" v-model="formData.name"/>
+        <p v-if="errors.name" class="error">{{ errors.name[0] }}</p>
       </div>
 
       <div>
