@@ -26,10 +26,12 @@ const formData = reactive({
 
       <div>
         <input type="text" placeholder="Email" v-model="formData.email"/>
+        <p v-if="errors.email" class="error">{{ errors.email[0] }}</p>
       </div>
 
       <div>
         <input type="password" placeholder="Password" v-model="formData.password"/>
+        <p v-if="errors.password" class="error">{{ errors.password[0] }}</p>
       </div>
 
       <div>
