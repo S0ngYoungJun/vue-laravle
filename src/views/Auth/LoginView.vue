@@ -7,23 +7,17 @@ const {error} = storeToRefs(useAuthStore())
 const { authenticate } = useAuthStore();
 
 const formData = reactive({
-  name:"",
   email: "",
   password: "",
-  password_confirmation:"",
 })
 </script>
 
 <template>
   <main>
-    <h1 class="title">Resister a new account {{ authStore.user }}</h1>
-    <form @submit.prevent="authenticate('register', formData)" 
+    <h1 class="title"> 로그인 하세요 {{ authStore.user }}</h1>
+    <form @submit.prevent="authenticate('login', formData)" 
     class="w-1/2 mx-auto space-y-6">
-      <div>
-        <input type="text" placeholder="Name" v-model="formData.name"/>
-        <p v-if="errors.name" class="error">{{ errors.name[0] }}</p>
-      </div>
-
+     
       <div>
         <input type="text" placeholder="Email" v-model="formData.email"/>
         <p v-if="errors.email" class="error">{{ errors.email[0] }}</p>
@@ -34,11 +28,7 @@ const formData = reactive({
         <p v-if="errors.password" class="error">{{ errors.password[0] }}</p>
       </div>
 
-      <div>
-        <input type="password" placeholder="Confirm Password" v-model="formData.password_confirmation"/>
-      </div>
-
-      <button class="primary-btn">Resister</button>
+      <button class="primary-btn">로그인</button>
     </form>
   </main>
 </template>

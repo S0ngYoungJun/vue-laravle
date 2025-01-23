@@ -8,6 +8,21 @@ export const useAuthStore = defineStore("authStore", {
     }
   },
   actions: {
+
+    async getUser() {
+      if (localStorage.getItem("token")) {
+        const res = await fetch("/api/user", {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const data = await res.json();
+        if (res.ok) {
+          this.user = data;
+        }
+      }
+    },
+    
    async authenticate(apiRoute, apiuformData) {
     const res = await fetch(`/api/${register}`, {
       method:'post',
@@ -20,6 +35,7 @@ export const useAuthStore = defineStore("authStore", {
     } else{
       localStorage.setItem('token', data.token)
       this.user = data.user
+      this.router.push({ name: "home"})
     }
    }
   }
