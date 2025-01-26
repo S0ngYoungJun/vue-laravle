@@ -15,7 +15,7 @@ onMounted(() => {
       <nav>
         <RouterLink :to="{name: 'home'}" class="nav-link">Home</RouterLink>
         <div>
-          <form>
+          <form @submit.prevent="authStore.logout">
             <button class="nav-link">Logout</button>
           </form>
         </div>
