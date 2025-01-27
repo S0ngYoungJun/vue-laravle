@@ -15,13 +15,24 @@ const router = createRouter({
       path: '/resister',
       name: 'register',
       component: RegisterView,
+      meta: {guest: true}
     },
     {
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta: {guest: true},
     },
   ],
+});
+
+router.beforeEach(async (toString, from, next)=> {
+  const authStore = useAuthStore();
+  await authStore.getUser();
+  
+  if (authStore.user && to.meta.guest) {
+    return {name: "home"};
+  }
 })
 
 export default router
