@@ -27,6 +27,7 @@ const router = createRouter({
       path: '/create',
       name: 'create',
       component: CreateView,
+      meta: {auth: true},
     },
   ],
 });
@@ -37,6 +38,10 @@ router.beforeEach(async (toString, from, next)=> {
   
   if (authStore.user && to.meta.guest) {
     return {name: "home"};
+  }
+
+  if (authStore.user && to.meta.auth) {
+    return {name: "login"};
   }
 })
 
