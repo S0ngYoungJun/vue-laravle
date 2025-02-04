@@ -8,8 +8,8 @@ export const useAuthStore = defineStore("postsStore", {
   },
   actions: {
 
-    async getAllPosts(){
-      const res = await fetch("/api/posts");
+    async getAllPosts(post){
+      const res = await fetch(`/api/posts/${post}`);
       const data = await res.json();
 
       console.log(data);
